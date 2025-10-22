@@ -9,6 +9,7 @@ import {
     Box,
     Card,
     CardContent,
+    CardMedia,
     TextField,
     IconButton,
     Drawer,
@@ -22,24 +23,54 @@ import {
     Menu as MenuIcon,
     LocationOn as LocationOnIcon,
     MailOutline as MailOutlineIcon,
-    Biotech as BiotechIcon,
-    PrecisionManufacturing as PrecisionManufacturingIcon,
-    Handshake as HandshakeIcon,
-    CorporateFare as CorporateFareIcon,
-    EnergySavingsLeaf as EcoIcon,
     Brightness4 as Brightness4Icon,
     Brightness7 as Brightness7Icon,
+    ScienceOutlined as ScienceOutlinedIcon,
+    TipsAndUpdatesOutlined as TipsAndUpdatesOutlinedIcon,
+    EnergySavingsLeafOutlined as EnergySavingsLeafOutlinedIcon,
 } from '@mui/icons-material';
 import { ThemeContext } from '../theme/AppThemeProvider';
 
+// --- IMAGENS ---
+import auftekLogoImg from '../assets/logo1.png';
+import auftekLogoImgCompleta from '../assets/logo2.png';
+import heroDevice1 from '../assets/BioAILabFront.png';
+import heroDevice2 from '../assets/BioAILabLado.png';
+import bioailabDevice from '../assets/BioAILabLado.png';
+import pvaglabDevice from '../assets/PVGAGLab.png';
+import governoRsLogo from '../assets/governo_rs.png';
+import finepLogo from '../assets/finep.png';
+import fapergsLogo from '../assets/fapergs.png';
+import sebraeLogo from '../assets/sebrae.png';
+import ufsmLogo from '../assets/ufsm.png';
+
 const AuftekLogo = () => (
-    <Typography variant="h6" component="div" sx={{ fontWeight: 700 }}>
-        AUFTEK
-    </Typography>
+    <Box
+        component="img"
+        src={auftekLogoImg}
+        alt="Auftek Logo"
+        sx={{ height: 40, width: 'auto' }}
+    />
+);
+const AuftekLogo2 = () => (
+    <Box
+        component="img"
+        src={auftekLogoImgCompleta}
+        alt="Auftek Logo"
+        sx={{ height: 40, width: 'auto' }}
+    />
 );
 
-const navItems = ['Quem Somos', 'Soluções', 'Blog', 'Sistema'];
+const navItems = [
+    'Sobre nós',
+    'Soluções',
+    'Parceiros',
+    'Premiações',
+    'Blog',
+    'Contato',
+];
 
+// ================= HEADER =====================
 const Header = () => {
     const theme = useTheme();
     const colorMode = useContext(ThemeContext);
@@ -71,10 +102,11 @@ const Header = () => {
     return (
         <AppBar
             position="sticky"
-            color="primary"
             elevation={0}
             sx={{
-                borderBottom: `1px solid ${theme.palette.divider}`,
+                backgroundColor: 'background.paper',
+                color: 'text.primary',
+                borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
             }}
         >
             <Container maxWidth="lg">
@@ -94,7 +126,6 @@ const Header = () => {
                             </IconButton>
                             <IconButton
                                 color="inherit"
-                                aria-label="open drawer"
                                 edge="end"
                                 onClick={handleDrawerToggle}
                             >
@@ -102,16 +133,19 @@ const Header = () => {
                             </IconButton>
                         </Box>
                     ) : (
-                        <Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             {navItems.map((item) => (
                                 <Button
                                     key={item}
                                     color="inherit"
-                                    sx={{ ml: 2 }}
+                                    sx={{ ml: 2, textTransform: 'none' }}
                                 >
                                     {item}
                                 </Button>
                             ))}
+                            <Button variant="contained" sx={{ ml: 3 }}>
+                                Sistema
+                            </Button>
                             <IconButton
                                 onClick={colorMode.toggleColorMode}
                                 color="inherit"
@@ -139,338 +173,322 @@ const Header = () => {
     );
 };
 
-const HeroSection = () => (
-    <Box
-        sx={{
-            py: { xs: 8, md: 12 },
-            textAlign: 'center',
-            backgroundColor: 'primary.dark',
-            color: 'primary.contrastText',
-        }}
-    >
-        <Container maxWidth="md">
-            <Typography variant="overline" color="secondary.light">
-                DEEPTECH BRASILEIRA
-            </Typography>
-            <Typography
-                variant="h2"
-                component="h1"
-                gutterBottom
-                sx={{ fontWeight: 700 }}
-            >
-                Tecnologia inteligente para o monitoramento microbiológico em
-                tempo real.
-            </Typography>
-            <Typography variant="h6" color="secondary.light" sx={{ mb: 2 }}>
-                Conheça o BioAiLab e obtenha resultados em horas, não dias.
-            </Typography>
-            <Button
-                variant="contained"
-                color="secondary"
-                size="large"
-                sx={{ mt: 4 }}
-            >
-                Quero saber mais
-            </Button>
-        </Container>
-    </Box>
-);
+// ================= HERO SECTION =====================
+// Texto à esquerda, imagens à direita; imagens lado-a-lado em desktop
+const HeroSection = () => {
+    const theme = useTheme();
+    const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
-const AboutSection = () => (
-    <Box
-        id="quem-somos"
-        sx={{ py: { xs: 8, md: 10 }, backgroundColor: 'background.default' }}
-    >
-        <Container maxWidth="lg">
-            <Grid container spacing={4} alignItems="center">
-                <Grid item xs={12} md={6}>
-                    <Typography
-                        variant="h4"
-                        component="h2"
-                        gutterBottom
-                        fontWeight={700}
-                        color="primary.dark"
+    return (
+        <Box
+            sx={{
+                py: { xs: 6, md: 12 },
+                backgroundColor: 'primary.dark',
+                color: 'primary.contrastText',
+            }}
+        >
+            <Container maxWidth="lg">
+                <Grid
+                    container
+                    spacing={4}
+                    alignItems="center"
+                    wrap={isMdUp ? 'nowrap' : 'wrap'}
+                    sx={{ minHeight: { md: '68vh' } }}
+                >
+                    {/* Texto à esquerda */}
+                    <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        sx={{
+                            textAlign: { xs: 'center', md: 'left' },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            px: { xs: 2, md: 0 },
+                        }}
                     >
-                        Quem Somos
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        color="text.secondary"
-                        sx={{ mb: 2 }}
-                    >
-                        A Auftek, startup de Santa Maria (RS), transforma
-                        ciência em instrumentação inteligente.
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        color="text.secondary"
-                        sx={{ mb: 2 }}
-                    >
-                        Nosso lema "It's time, to save time" reflete o propósito
-                        de criar tecnologias que economizam tempo e otimizam
-                        processos.
-                    </Typography>
-                    <Typography
-                        variant="body1"
-                        color="text.secondary"
-                        sx={{ mb: 2 }}
-                    >
-                        Nosso principal produto é o BioAiLab, que reduz análises
-                        microbiológicas de dias para horas, com aplicações em
-                        saneamento, indústria, agronegócio e meio ambiente.
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary">
-                        No setor de energia, desenvolvemos instrumentos para
-                        pesquisa e certificação de sistemas fotovoltaicos.
-                    </Typography>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                    <Grid container spacing={3}>
-                        {[
-                            {
-                                icon: (
-                                    <CorporateFareIcon
-                                        fontSize="large"
-                                        color="primary"
-                                    />
-                                ),
-                                title: 'P&D de alta performance',
-                                description:
-                                    'Parcerias estratégicas para gerar impacto real.',
-                            },
-                            {
-                                icon: (
-                                    <BiotechIcon
-                                        fontSize="large"
-                                        color="primary"
-                                    />
-                                ),
-                                title: 'Tecnologia proprietária',
-                                description:
-                                    'Soluções exclusivas com base científica.',
-                            },
-                            {
-                                icon: (
-                                    <EcoIcon fontSize="large" color="primary" />
-                                ),
-                                title: 'Foco em sustentabilidade',
-                                description:
-                                    'Tecnologia que cuida da saúde e do meio ambiente.',
-                            },
-                        ].map((item) => (
-                            <Grid item xs={12} key={item.title}>
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <Box sx={{ mr: 2 }}>{item.icon}</Box>
-                                    <Box>
-                                        <Typography
-                                            variant="h6"
-                                            fontWeight={600}
-                                        >
-                                            {item.title}
-                                        </Typography>
-                                        <Typography color="text.secondary">
-                                            {item.description}
-                                        </Typography>
-                                    </Box>
-                                </Box>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Container>
-    </Box>
-);
+                        <Typography
+                            variant="overline"
+                            color="secondary.light"
+                            sx={{ mb: 1 }}
+                        >
+                            DEEPTECH BRASILEIRA
+                        </Typography>
 
-const SolutionsSection = () => (
-    <Box
-        id="solucoes"
-        sx={{ py: { xs: 8, md: 10 }, backgroundColor: 'background.paper' }}
-    >
-        <Container maxWidth="lg">
-            <Typography
-                variant="h4"
-                component="h2"
-                textAlign="center"
-                gutterBottom
-                fontWeight={700}
-                color="primary.dark"
-            >
-                Nossas Soluções
-            </Typography>
-            <Grid container spacing={4} justifyContent="center" sx={{ mt: 4 }}>
-                {[
-                    {
-                        icon: (
-                            <BiotechIcon
-                                sx={{ fontSize: 60, color: 'primary.main' }}
-                            />
-                        ),
-                        category: 'Microbiologia Inteligente',
-                        title: 'BioAiLab',
-                        description:
-                            'Tecnologia inteligente para detectar e quantificar bactérias em tempo real. Monitoramento rápido, preciso e versátil para setores como saneamento, indústria, agricultura e pesquisa.',
-                    },
-                    {
-                        icon: (
-                            <PrecisionManufacturingIcon
-                                sx={{ fontSize: 60, color: 'primary.main' }}
-                            />
-                        ),
-                        category: 'Engenharia de Precisão',
-                        title: 'Instrumentação Customizada',
-                        description:
-                            'Desenvolvimento de equipamentos e sensores sob medida para pesquisa e desenvolvimento, com foco no setor de energia e sistemas fotovoltaicos.',
-                    },
-                ].map((solution) => (
-                    <Grid item xs={12} sm={6} md={5} key={solution.title}>
-                        <Card
+                        <Typography
+                            variant="h2"
+                            component="h1"
+                            gutterBottom
                             sx={{
-                                height: '100%',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                p: 2,
+                                fontWeight: 700,
+                                lineHeight: 1.05,
+                                fontSize: {
+                                    xs: '2rem',
+                                    sm: '2.6rem',
+                                    md: '3.2rem',
+                                    lg: '3.6rem',
+                                },
                             }}
                         >
-                            <CardContent
-                                sx={{ flexGrow: 1, textAlign: 'center' }}
-                            >
-                                <Box sx={{ mb: 2 }}>{solution.icon}</Box>
-                                <Typography
-                                    variant="overline"
-                                    color="text.secondary"
-                                >
-                                    {solution.category}
-                                </Typography>
-                                <Typography
-                                    variant="h5"
-                                    component="h3"
-                                    gutterBottom
-                                    fontWeight={700}
-                                >
-                                    {solution.title}
-                                </Typography>
-                                <Typography color="text.secondary">
-                                    {solution.description}
-                                </Typography>
-                            </CardContent>
-                            <Box sx={{ p: 2, textAlign: 'center' }}>
-                                <Button variant="outlined" color="primary">
-                                    Saiba Mais
-                                </Button>
-                            </Box>
-                        </Card>
-                    </Grid>
-                ))}
-            </Grid>
-        </Container>
-    </Box>
-);
+                            Tecnologia inteligente para o monitoramento
+                            microbiológico em tempo real.
+                        </Typography>
 
-const PartnersSection = () => {
-    const theme = useTheme();
-    const partners = [
+                        <Typography
+                            variant="h6"
+                            color="secondary.light"
+                            sx={{ mb: 4, maxWidth: { md: '90%' } }}
+                        >
+                            Conheça o BioAiLab e obtenha resultados em horas,
+                            não dias.
+                        </Typography>
+
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                gap: 2,
+                                justifyContent: {
+                                    xs: 'center',
+                                    md: 'flex-start',
+                                },
+                            }}
+                        >
+                            <Button
+                                variant="contained"
+                                color="info"
+                                size="large"
+                            >
+                                Explorar soluções
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                size="large"
+                            >
+                                Conheça a empresa
+                            </Button>
+                        </Box>
+                    </Grid>
+
+                    {/* Imagens à direita — lado a lado em desktop */}
+                    <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        sx={{
+                            display: 'flex',
+                            justifyContent: { xs: 'center', md: 'flex-end' },
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: { xs: 'row', md: 'row' }, // manter lado a lado em md+
+                                gap: { xs: 1.5, md: 3 },
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: { xs: '100%', md: '100%' },
+                                maxWidth: { md: 520 }, // limita o bloco de imagens para não empurrar o texto
+                                px: { xs: 1, md: 0 },
+                            }}
+                        >
+                            <Box
+                                component="img"
+                                src={heroDevice1}
+                                alt="Dispositivo BioAiLab 1"
+                                sx={{
+                                    width: { xs: '66%', sm: '50%', md: '48%' },
+                                    maxWidth: { xs: 160, sm: 200, md: 260 },
+                                    height: 'auto',
+                                    objectFit: 'contain',
+                                }}
+                            />
+                            <Box
+                                component="img"
+                                src={heroDevice2}
+                                alt="Dispositivo BioAiLab 2"
+                                sx={{
+                                    width: { xs: '60%', sm: '40%', md: '48%' },
+                                    maxWidth: { xs: 160, sm: 180, md: 260 },
+                                    height: 'auto',
+                                    objectFit: 'contain',
+                                    transform: { md: 'translateY(-6%)' },
+                                }}
+                            />
+                        </Box>
+                    </Grid>
+                </Grid>
+            </Container>
+        </Box>
+    );
+};
+
+// ================= SOBRE NÓS =====================
+const AboutSection = () => {
+    const features = [
         {
-            name: 'Conecta Startup Brasil',
-            logo: 'https://placehold.co/150x60?text=Conecta',
-            details: 'MCTI, Softes, Seb',
+            icon: (
+                <ScienceOutlinedIcon
+                    sx={{ fontSize: 40, color: 'primary.main' }}
+                />
+            ),
+            title: 'P&D de alta performance',
+            description: 'Parcerias estratégicas para gerar impacto real.',
         },
         {
-            name: 'Caso de Sucesso de Inovação RS 2022',
-            logo: 'https://placehold.co/150x60?text=Sucesso+RS',
-            details: 'SICTI/RS',
+            icon: (
+                <TipsAndUpdatesOutlinedIcon
+                    sx={{ fontSize: 40, color: 'primary.main' }}
+                />
+            ),
+            title: 'Tecnologia proprietária',
+            description: 'Soluções exclusivas com base científica.',
         },
         {
-            name: 'Programa Centelha & Techfuturo',
-            logo: 'https://placehold.co/150x60?text=Centelha',
-            details: 'Fomento estadual',
+            icon: (
+                <EnergySavingsLeafOutlinedIcon
+                    sx={{ fontSize: 40, color: 'primary.main' }}
+                />
+            ),
+            title: 'Inovação responsável',
+            description: 'Tecnologia que cuida da saúde e do meio ambiente.',
         },
-        {
-            name: 'Eletrobras',
-            logo: 'https://placehold.co/150x60?text=Eletrobras',
-            details: 'Cepel',
-        },
-        { name: 'UFSM', logo: 'https://placehold.co/150x60?text=UFSM' },
-        { name: 'FAPERGS', logo: 'https://placehold.co/150x60?text=FAPERGS' },
-        { name: 'Finep', logo: 'https://placehold.co/150x60?text=Finep' },
-        { name: 'IEE USP', logo: 'https://placehold.co/150x60?text=IEE+USP' },
-        {
-            name: 'Mackenzie',
-            logo: 'https://placehold.co/150x60?text=Mackenzie',
-        },
-        { name: 'SoluBio', logo: 'https://placehold.co/150x60?text=SoluBio' },
     ];
 
     return (
         <Box
-            id="parceiros"
+            id="quem-somos"
             sx={{
-                py: { xs: 8, md: 10 },
+                py: { xs: 6, md: 10 },
                 backgroundColor: 'background.default',
             }}
         >
             <Container maxWidth="lg">
-                <Typography
-                    variant="h4"
-                    component="h2"
-                    textAlign="center"
-                    gutterBottom
-                    fontWeight={700}
-                    color="primary.dark"
-                >
-                    Nossos principais parceiros e apoiadores
-                </Typography>
+                {/* Row principal: texto (left) + vídeo (right) */}
                 <Grid
                     container
                     spacing={4}
-                    justifyContent="center"
                     alignItems="center"
-                    sx={{ mt: 4 }}
+                    sx={{
+                        // garante bom espaçamento vertical e evita quebra inesperada
+                        alignContent: 'center',
+                    }}
                 >
-                    {partners.map((partner) => (
-                        <Grid
-                            item
-                            xs={6}
-                            sm={4}
-                            md={3}
-                            lg={2}
-                            key={partner.name}
-                            sx={{ textAlign: 'center' }}
+                    {/* Coluna do texto */}
+                    <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        sx={{
+                            order: { xs: 1, md: 1 },
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            textAlign: { xs: 'center', md: 'left' },
+                            pr: { md: 4 },
+                        }}
+                    >
+                        <Typography
+                            variant="h4"
+                            component="h2"
+                            gutterBottom
+                            fontWeight={700}
                         >
+                            Quem Somos
+                        </Typography>
+
+                        <Typography
+                            variant="body1"
+                            color="text.secondary"
+                            sx={{ mb: 2 }}
+                        >
+                            A Auftek Tecnologia, startup de Santa Maria (RS),
+                            transforma ciência em instrumentação inteligente.
+                            Nosso lema — “It’s time to save time” — reflete o
+                            propósito de criar tecnologias que economizam tempo
+                            e otimizam processos.
+                        </Typography>
+
+                        <Typography variant="body1" color="text.secondary">
+                            Nosso principal produto, o BioAiLab, reduz análises
+                            microbiológicas de dias para horas, com aplicações
+                            no saneamento, indústria, agronegócio e meio
+                            ambiente. E no setor de energia, desenvolvemos
+                            instrumentos para pesquisa e certificação de
+                            sistemas fotovoltaicos.
+                        </Typography>
+                    </Grid>
+
+                    {/* Coluna do vídeo (lado direito em md+) */}
+                    <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        sx={{
+                            order: { xs: 2, md: 2 },
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: { xs: 'center', md: 'flex-end' },
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                width: { xs: '100%', sm: '90%', md: '100%' },
+                                maxWidth: 720,
+                                borderRadius: 2,
+                                overflow: 'hidden',
+                                boxShadow: 3,
+                            }}
+                        >
+                            {/* Substitua este bloco pelo iframe do vídeo quando tiver o link */}
                             <Box
-                                component="img"
-                                src={partner.logo}
-                                alt={partner.name}
                                 sx={{
-                                    maxHeight: 60,
-                                    maxWidth: '100%',
-                                    filter:
-                                        theme.palette.mode === 'dark'
-                                            ? 'invert(1) grayscale(1)'
-                                            : 'grayscale(1)',
-                                    opacity: 0.7,
-                                    transition: '0.3s',
-                                    '&:hover': {
-                                        filter: 'none',
-                                        opacity: 1,
-                                    },
+                                    width: '100%',
+                                    aspectRatio: '16/9',
+                                    backgroundColor: 'action.hover',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    border: '1px solid',
+                                    borderColor: 'divider',
                                 }}
-                            />
-                            {partner.details && (
-                                <Typography
-                                    variant="caption"
-                                    display="block"
-                                    color="text.secondary"
-                                    sx={{ mt: 1 }}
-                                >
-                                    {partner.details}
+                            >
+                                <Typography variant="h6" color="text.secondary">
+                                    Vídeo institucional
                                 </Typography>
-                            )}
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
+
+                {/* ROW SEPARADO PARA OS CARDS - sempre abaixo */}
+                <Grid container spacing={3} sx={{ mt: 6 }}>
+                    {features.map((feature) => (
+                        <Grid key={feature.title} item xs={12} sm={6} md={4}>
+                            <Card
+                                variant="outlined"
+                                sx={{
+                                    textAlign: 'center',
+                                    p: 2,
+                                    height: '100%',
+                                }}
+                            >
+                                <CardContent>
+                                    {feature.icon}
+                                    <Typography
+                                        variant="h6"
+                                        fontWeight="700"
+                                        sx={{ my: 1 }}
+                                    >
+                                        {feature.title}
+                                    </Typography>
+                                    <Typography color="text.secondary">
+                                        {feature.description}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
                         </Grid>
                     ))}
                 </Grid>
@@ -479,39 +497,114 @@ const PartnersSection = () => {
     );
 };
 
-const CtaSection = () => (
-    <Box
-        sx={{
-            py: { xs: 8, md: 10 },
-            backgroundColor: 'secondary.dark',
-            color: 'secondary.contrastText',
-        }}
-    >
-        <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-            <Typography
-                variant="h4"
-                component="h2"
-                gutterBottom
-                fontWeight={700}
-            >
-                Pronto para economizar tempo?
-            </Typography>
-            <Typography variant="body1" color="secondary.light" sx={{ mb: 2 }}>
-                Converse com a nosso time e descubra como a Auftek se encaixa no
-                seu cenário.
-            </Typography>
-            <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                sx={{ mt: 2 }}
-            >
-                Agendar conversa
-            </Button>
-        </Container>
-    </Box>
-);
+// ================= SOLUÇÕES =====================
+const SolutionsSection = () => {
+    const [activeTab, setActiveTab] = useState('microbiologia');
 
+    const solutions = {
+        microbiologia: {
+            title: 'BioAiLab',
+            description:
+                'Tecnologia inteligente para detectar e quantificar bactérias em tempo real.',
+            image: bioailabDevice,
+        },
+        engenharia: {
+            title: 'PVAG LAB',
+            description:
+                'Equipamento de alta precisão para emular situações de arco elétrico.',
+            image: pvaglabDevice,
+        },
+    };
+
+    const currentSolution = solutions[activeTab];
+
+    return (
+        <Box
+            id="solucoes"
+            sx={{
+                py: { xs: 8, md: 10 },
+                backgroundColor: 'primary.dark',
+                color: 'primary.contrastText',
+            }}
+        >
+            <Container maxWidth="lg">
+                <Typography
+                    variant="h4"
+                    component="h2"
+                    gutterBottom
+                    fontWeight={700}
+                >
+                    Nossas Soluções
+                </Typography>
+
+                <Box sx={{ display: 'flex', gap: 2, mb: 4, flexWrap: 'wrap' }}>
+                    <Button
+                        variant={
+                            activeTab === 'microbiologia'
+                                ? 'contained'
+                                : 'outlined'
+                        }
+                        color="secondary"
+                        onClick={() => setActiveTab('microbiologia')}
+                    >
+                        Microbiologia Inteligente
+                    </Button>
+                    <Button
+                        variant={
+                            activeTab === 'engenharia'
+                                ? 'contained'
+                                : 'outlined'
+                        }
+                        color="secondary"
+                        onClick={() => setActiveTab('engenharia')}
+                    >
+                        Engenharia de Precisão
+                    </Button>
+                </Box>
+
+                <Grid container spacing={4} alignItems="center">
+                    <Grid item xs={12} md={6}>
+                        <Typography
+                            variant="h3"
+                            component="h3"
+                            fontWeight={700}
+                            gutterBottom
+                        >
+                            {currentSolution.title}
+                        </Typography>
+                        <Typography variant="body1" sx={{ mb: 3 }}>
+                            {currentSolution.description}
+                        </Typography>
+                        <Button variant="outlined" color="secondary">
+                            Saiba Mais
+                        </Button>
+                    </Grid>
+                    <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        sx={{
+                            display: 'flex',
+                            justifyContent: { xs: 'center', md: 'flex-end' },
+                        }}
+                    >
+                        <Box
+                            component="img"
+                            src={currentSolution.image}
+                            alt={currentSolution.title}
+                            sx={{
+                                maxWidth: { xs: '90%', md: '80%' },
+                                height: 'auto',
+                            }}
+                        />
+                    </Grid>
+                </Grid>
+            </Container>
+        </Box>
+    );
+};
+
+// ================= CONTATO =====================
 const ContactSection = () => (
     <Box
         id="contato"
@@ -520,46 +613,21 @@ const ContactSection = () => (
         <Container maxWidth="lg">
             <Typography
                 variant="h4"
-                component="h2"
                 textAlign="center"
                 gutterBottom
                 fontWeight={700}
-                color="primary.dark"
             >
                 Contato
-            </Typography>
-            <Typography
-                textAlign="center"
-                color="text.secondary"
-                sx={{ mb: 2 }}
-            >
-                Conte um pouco sobre o seu projeto e como podemos ajudar!
             </Typography>
             <Grid container spacing={5} sx={{ mt: 4 }}>
                 <Grid item xs={12} md={6}>
                     <Box component="form" noValidate autoComplete="off">
-                        <TextField
-                            fullWidth
-                            label="Seu nome"
-                            variant="outlined"
-                            margin="normal"
-                        />
-                        <TextField
-                            fullWidth
-                            label="E-mail"
-                            variant="outlined"
-                            margin="normal"
-                        />
-                        <TextField
-                            fullWidth
-                            label="Empresa"
-                            variant="outlined"
-                            margin="normal"
-                        />
+                        <TextField fullWidth label="Seu nome" margin="normal" />
+                        <TextField fullWidth label="E-mail" margin="normal" />
+                        <TextField fullWidth label="Empresa" margin="normal" />
                         <TextField
                             fullWidth
                             label="Como podemos ajudar?"
-                            variant="outlined"
                             margin="normal"
                             multiline
                             rows={4}
@@ -567,7 +635,6 @@ const ContactSection = () => (
                         <Button
                             type="submit"
                             variant="contained"
-                            color="primary"
                             size="large"
                             fullWidth
                             sx={{ mt: 2 }}
@@ -618,29 +685,6 @@ const ContactSection = () => (
                                     adriano.marques@auftek.com
                                 </Typography>
                             </Box>
-                            <Box
-                                sx={{
-                                    height: 250,
-                                    mt: 2,
-                                    borderRadius: 1,
-                                    overflow: 'hidden',
-                                    filter: (theme) =>
-                                        theme.palette.mode === 'dark'
-                                            ? 'invert(0.9) hue-rotate(180deg)'
-                                            : 'none',
-                                }}
-                            >
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.739722349437!2d-53.71698668489324!3d-29.72750198199723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9503ad1d53a18e07%3A0x51480b33418c21!2sPulsar%20-%20Incubadora%20Tecnol%C3%B3gica%20da%20UFSM!5e0!3m2!1spt-BR!2sbr!4v1678886397631!5m2!1spt-BR!2sbr"
-                                    width="100%"
-                                    height="100%"
-                                    style={{ border: 0 }}
-                                    allowFullScreen=""
-                                    loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                    title="Mapa da localização da Auftek"
-                                ></iframe>
-                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -649,9 +693,9 @@ const ContactSection = () => (
     </Box>
 );
 
+// ================= FOOTER =====================
 const Footer = () => (
     <Box
-        component="footer"
         sx={{
             backgroundColor: 'primary.dark',
             color: 'primary.contrastText',
@@ -659,78 +703,10 @@ const Footer = () => (
         }}
     >
         <Container maxWidth="lg">
-            <Grid container spacing={4}>
-                <Grid item xs={12} sm={4}>
-                    <AuftekLogo />
-                    <Typography
-                        variant="body2"
-                        sx={{ mt: 1, color: 'secondary.light' }}
-                    >
-                        Tecnologia inteligente para o monitoramento
-                        microbiológico.
-                    </Typography>
-                </Grid>
-                <Grid item xs={6} sm={2}>
-                    <Typography variant="h6" gutterBottom>
-                        Explore
-                    </Typography>
-                    <Box component="nav">
-                        <Button color="inherit" sx={{ display: 'block' }}>
-                            Quem Somos
-                        </Button>
-                        <Button color="inherit" sx={{ display: 'block' }}>
-                            Soluções
-                        </Button>
-                        <Button color="inherit" sx={{ display: 'block' }}>
-                            Blog
-                        </Button>
-                    </Box>
-                </Grid>
-                <Grid item xs={6} sm={3}>
-                    <Typography variant="h6" gutterBottom>
-                        Nossos Apoiadores
-                    </Typography>
-                    <Box component="nav">
-                        <Button color="inherit" sx={{ display: 'block' }}>
-                            Finep
-                        </Button>
-                        <Button color="inherit" sx={{ display: 'block' }}>
-                            FAPERGS
-                        </Button>
-                    </Box>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                    <Typography variant="h6" gutterBottom>
-                        Contato
-                    </Typography>
-                    <Typography
-                        variant="body2"
-                        sx={{ color: 'secondary.light' }}
-                    >
-                        Santa Maria - RS, Brasil
-                    </Typography>
-                    <Typography
-                        variant="body2"
-                        sx={{ color: 'secondary.light' }}
-                    >
-                        adriano.marques@auftek.com
-                    </Typography>
-                </Grid>
-            </Grid>
-            <Box
-                sx={{
-                    textAlign: 'center',
-                    mt: 4,
-                    pt: 4,
-                    borderTop: 1,
-                    borderColor: 'secondary.dark',
-                }}
-            >
-                <Typography variant="body2" color="secondary.light">
-                    © {new Date().getFullYear()} AUFTEK. Todos os direitos
-                    reservados.
-                </Typography>
-            </Box>
+            <Typography variant="body2" textAlign="center">
+                © {new Date().getFullYear()} AUFTEK. Todos os direitos
+                reservados.
+            </Typography>
         </Container>
     </Box>
 );
@@ -743,8 +719,6 @@ export default function HomePage() {
                 <HeroSection />
                 <AboutSection />
                 <SolutionsSection />
-                <PartnersSection />
-                <CtaSection />
                 <ContactSection />
             </main>
             <Footer />

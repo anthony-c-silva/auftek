@@ -91,7 +91,7 @@ export const getDesignTokens = (mode) => ({
               }),
     },
     typography: {
-        fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(','),
+        fontFamily: "'M PLUS Rounded 1c', sans-serif",
         h5: {
             fontWeight: 700,
         },
