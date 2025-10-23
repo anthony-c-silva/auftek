@@ -1,4 +1,3 @@
-// src/pages/Home/HeroSection.jsx
 import React from 'react';
 import {
     Typography,
@@ -11,13 +10,12 @@ import {
 } from '@mui/material';
 
 // --- IMAGENS ---
-import heroDevice1 from '../../assets/BioAILabFront.png'; // Ajuste o caminho
-import heroDevice2 from '../../assets/BioAILabLado.png'; // Ajuste o caminho
+import heroDevice1 from '../../assets/BioAILabFront.png';
+import heroDevice2 from '../../assets/BioAILabLado.png';
 
 // ================= HERO SECTION =====================
 export default function HeroSection() {
     const theme = useTheme();
-    const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
     return (
         <Box
@@ -28,23 +26,29 @@ export default function HeroSection() {
             }}
         >
             <Container maxWidth="lg">
-                <Grid
-                    container
-                    spacing={4}
-                    alignItems="center"
-                    wrap={isMdUp ? 'nowrap' : 'wrap'}
-                >
-                    <Grid item xs={12} md={6}>
-                        <Typography
-                            variant="overline"
-                            color="secondary.light"
+                <Grid container spacing={7} alignItems="center">
+                    <Grid item xs={12} md={5}>
+                        <Box
                             sx={{
-                                mb: 1,
+                                mb: 4,
                                 textAlign: { xs: 'center', md: 'left' },
                             }}
                         >
-                            DEEPTECH BRASILEIRA
-                        </Typography>
+                            <Typography
+                                variant="overline"
+                                sx={{
+                                    display: 'inline-block',
+                                    backgroundColor: 'white',
+                                    color: 'primary.dark',
+                                    px: 2,
+                                    py: 0.5,
+                                    borderRadius: '50px',
+                                    fontWeight: 600,
+                                }}
+                            >
+                                DEEPTECH BRASILEIRA
+                            </Typography>
+                        </Box>
                         <Typography
                             variant="h2"
                             component="h1"
@@ -61,8 +65,16 @@ export default function HeroSection() {
                                 },
                             }}
                         >
-                            Tecnologia inteligente para o monitoramento
-                            microbiológico em tempo real.
+                            <span style={{ display: 'block' }}>
+                                Tecnologia inteligente
+                            </span>
+                            <span style={{ display: 'block' }}>
+                                para o monitoramento
+                            </span>
+                            <span style={{ display: 'block' }}>
+                                microbiológico em
+                            </span>
+                            <span style={{ display: 'block' }}>tempo real.</span>
                         </Typography>
                         <Typography
                             variant="h6"
@@ -95,7 +107,7 @@ export default function HeroSection() {
                             </Button>
                             <Button
                                 variant="outlined"
-                                color="secondary"
+                                color="info"
                                 size="large"
                             >
                                 Conheça a empresa
@@ -105,7 +117,7 @@ export default function HeroSection() {
                     <Grid
                         item
                         xs={12}
-                        md={6}
+                        md={7}
                         sx={{
                             display: 'flex',
                             justifyContent: 'center',
@@ -145,3 +157,4 @@ export default function HeroSection() {
         </Box>
     );
 }
+

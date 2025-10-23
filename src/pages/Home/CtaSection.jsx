@@ -24,7 +24,7 @@ const CtaSection = () => (
             </Typography>
             <Button
                 variant="contained"
-                color="primary"
+                color="info"
                 size="large"
                 sx={{ mt: 2 }}
             >

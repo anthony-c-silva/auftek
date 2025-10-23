@@ -166,7 +166,7 @@ export default function ContactSection() {
                                     }}
                                 >
                                     <iframe
-                                        src="https://maps.google.com/maps?q=Pr%C3%A9dio%202%20-%20Av.%20Roraima%20-%20Camobi%2C%20Santa%20Maria%20-%20RS%2C%2097105-900&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                        src="https://maps.google.com/maps?q=-29.711028,-53.716250&t=&z=15&ie=UTF8&iwloc=&output=embed"
                                         width="100%"
                                         height="100%"
                                         style={{ border: 0 }}
@@ -184,3 +184,4 @@ export default function ContactSection() {
         </Box>
     );
 }
+
