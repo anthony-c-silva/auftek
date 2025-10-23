@@ -9,7 +9,9 @@ import AboutSection from './AboutSection';
 import SolutionsSection from './SolutionsSection';
 import ContactSection from './ContactSection';
 import Footer from './Footer';
-
+import TeamSection  from './TeamSection';
+import CtaSection from './CtaSection';
+import PartnersSection from './PartnersSection';
 // Este é o componente que você exportaria e usaria no seu App.js
 export default function HomePage() {
     return (
@@ -19,7 +21,10 @@ export default function HomePage() {
                 <HeroSection />
                 <AboutSection />
                 <SolutionsSection />
+                <TeamSection/>
+                <CtaSection/>
                 <ContactSection />
+                <PartnersSection/>
             </main>
             <Footer />
         </Box>
